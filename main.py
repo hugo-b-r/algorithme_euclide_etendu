@@ -25,7 +25,26 @@ class Brique:
 
 
 
+    # on developper mais seulement un produit de deux termes à la fois
+    # donc on crée une nouvelle brique qui contiendra seulement deux termes
+    def developpe(self):
+        if (self.type == "produit"):
+            #ATTENTION, NE DEVELEOPPE QUE LES DEUX PREMIERS TERMES
+            resultat = Brique([], "somme")
+            
+            #on developpe le produit actif
+            for i in self.termes[0].termes:
+                for j in self.termes[1].termes:
+                    produit_intermediaire = Brique([j, i], "produit")
+                    resultat.termes.append(produit_intermediaire)
+            return resultat
+
+        else:
+            print("erreur: developpe: pas un produit")
+            exit()
     
+
+
     def ecrire(self, brique):
 
         texte = ""
@@ -56,11 +75,10 @@ class Brique:
 
                 
 
-#difference1 = Brique([2, -3, -6], "somme")
-#difference2 = Brique([4], "somme")
-#difference3 = Brique([3], "somme")
-#calculus = Brique([difference1, 4, 3], "produit")
-#print(calculus.ecrire(calculus.developpe()))
+difference1 = Brique([2, -3, -6], "somme")
+difference2 = Brique([4, 5], "somme")
+calculus = Brique([difference1, difference2], "produit")
+print(calculus.ecrire(calculus.developpe()))
 
 
 
