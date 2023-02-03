@@ -45,11 +45,11 @@ class Brique:
     
 
 
-    def ecrire(self, brique):
+    def ecrire(self):
 
         texte = ""
         elements_a_supprimer = []
-        for partie in brique.termes:
+        for partie in self.termes:
             if (type(partie) == int):
                 if (partie <= 0):
                     texte += "("
@@ -60,12 +60,12 @@ class Brique:
 
             else:
                 texte += "("
-                texte += partie.ecrire(partie)
+                texte += partie.ecrire()
                 texte += ")"
             
-            if (brique.type == "somme"):
+            if (self.type == "somme"):
                     texte += " + "
-            elif (brique.type == "produit"):
+            elif (self.type == "produit"):
                     texte += " x "
 
         texte = texte[:-3]
@@ -78,7 +78,7 @@ class Brique:
 difference1 = Brique([2, -3, -6], "somme")
 difference2 = Brique([4, 5], "somme")
 calculus = Brique([difference1, difference2], "produit")
-print(calculus.ecrire(calculus.developpe()))
+print(calculus.developpe().ecrire())
 
 
 
