@@ -99,3 +99,16 @@ def algorithme_euclide(a, b):
 
 
 
+def ecrire_algorithme_euclide(algorithme_euclide):
+    texte = ""
+    for ligne in algorithme_euclide:
+        texte += str(ligne[0])
+        texte += " = "
+        texte += str(ligne[1])
+        texte += " x "
+        texte += str(ligne[2])
+        texte += " + " 
+        texte += str(ligne[3])
+        texte += "\n"
+    return texte
+    
