@@ -73,16 +73,9 @@ class Brique:
 
 
 
-                
 
-difference1 = Brique([2, -3, -6], "somme")
-difference2 = Brique([4, 5], "somme")
-calculus = Brique([difference1, difference2], "produit")
-print(calculus.developpe().ecrire())
-
-
-
-
+#une fonction qui renvoie une liste a deux dimensions, cahque "ligne", sera
+# de longueur 4, le dividende, le quotient, le diviseur et le reste
 def algorithme_euclide(a, b):
     if (a == b):
         return a
@@ -91,20 +84,18 @@ def algorithme_euclide(a, b):
         b = a - b
         a = a - b
     
-    #initialisons une liste pour y stocker les quotients
-    texte = ""
     quotient = 1
     reste = 1
+    algorithme = []
     while (reste != 0):
         div_euclidienne = calculer_division_euclidienne(a, b)
         quotient = div_euclidienne[0]
         reste = div_euclidienne[1]
-        texte += ecrire_division_euclidienne(a, b, quotient, reste)
-        texte += "\n"
+        algorithme.append([a, b, quotient, reste])
         a = b
         b = reste
-    return texte
-#print(algorithme_euclide(198, 3100))
+    return algorithme
+
 
 
 
