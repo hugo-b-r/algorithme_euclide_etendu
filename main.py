@@ -154,6 +154,10 @@ def algorithme_etendu(algorithme_euclide):
         expressions.append(expression)
 
         #etape 2: on developpe
+        developpement_intermediaire = expression.termes[1].developpe()
+        expression.pop(1)
+        for sous_expression in developpement_intermediaire:
+            expression.append(sous_expression)
 
         #etape 3: on rassemble/simplifie
         i -= 1
