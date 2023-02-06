@@ -111,4 +111,38 @@ def ecrire_algorithme_euclide(algorithme_euclide):
         texte += str(ligne[3])
         texte += "\n"
     return texte
-    
+
+print(ecrire_algorithme_euclide(algorithme_euclide(24, 7)))
+
+
+
+
+def algorithme_etendu(algorithme_euclide):
+    texte = ""
+    i = 0
+    while algorithme_euclide[i][3]  != 1:
+        i += 1
+    expression = Brique([], "somme")
+    expressions = []
+    while i >= 0:
+        #etape 1: on remplace par dividende - diviseur x quotient a i-1
+        expression.termes.append(algorithme_euclide[i][0])
+        expression.termes.append(
+            Brique
+            ([
+                -algorithme_euclide[i][1], 
+                algorithme_euclide[i][2]
+            ],
+                "produit"
+            ))
+        expressions.append(expression)
+
+        #etape 2: on developpe
+
+        #etape 3: on rassemble/simplifie
+        i -= 1
+    return expressions
+
+
+
+print(algorithme_etendu(algorithme_euclide(23, 7)))
