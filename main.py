@@ -122,7 +122,7 @@ def algorithme_etendu(algorithme_euclide):
     texte = ""
     i = 0
     # on "positionne" i à l'étape où il y a 1 comme reste
-    while algorithme_euclide[i][3]  != 1:
+    while (algorithme_euclide[i][3]  != 1):
         i += 1
     expressions = []
     #on met la premiere expression dans la boite
@@ -155,22 +155,31 @@ def algorithme_etendu(algorithme_euclide):
 
         #etape 2: on developpe
         developpement = expression.termes[1].developpe()
+        #on transforme le deuxieme produit du develppement en un simple
+        developpement[1] = Brique ([
+            developpement[1].termes[0].termes[0],
+            developpement[1].termes[0].termes[1] * developpement[1].termes[1].termes[0]
+            ],
+            "produit"
+        )
+
         expression.pop(1)
         for sous_expression in developpement:
-            expression.append(sous_expression)
+            expression.append(sous_expression) 
         expressions.append(expression)
 
         #etape 3: on rassemble/simplifie
-        for i in range (len(developpement))
-        try:
-            if (expression[0].termes[0] == expression[i].termes[0]):
-                expression[i].termes[1] += expression[0].termes[1]
-                expression.pop(0)
-        finally:
+        for i in range (len(developpement)):
+            try:
+                if (expression[0].termes[0] == expression[i].termes[0]):
+                    expression[0].termes[1] += expression[i].termes[1]
+                    expression.pop(i)   # on remet l'expression en etat pour que 
+                                        # le prochain changé soit en deuxieme rang
+            finally:
+                pass
             expressions.append(expression)
 
         i -= 1
     return expressions
-
 
 
