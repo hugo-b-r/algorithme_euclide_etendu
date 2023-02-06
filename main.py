@@ -204,13 +204,12 @@ def algorithme_etendu(algorithme_euclide):
 
         #etape 3: on rassemble/simplifie
         for i in range (len(developpement.termes)):
-            try:
+            if (type(expression.termes[0]) != int):
                 if (expression.termes[0].termes[0] == expression.termes[i].termes[0]):
                     expression.termes[0].termes[1] += expression.termes[i].termes[1]
                     expression.pop(i)   # on remet l'expression en etat pour que 
                                         # le prochain changé soit en deuxieme rang
-            finally:
-                pass
+
             expressions.append(expression)
 
         i -= 1
