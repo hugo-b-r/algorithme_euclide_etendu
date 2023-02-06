@@ -166,6 +166,7 @@ def algorithme_etendu(algorithme_euclide):
         )],
         "somme"
     )
+    print(expression.ecrire())
     expressions.append(expression)
 
 
@@ -181,6 +182,7 @@ def algorithme_etendu(algorithme_euclide):
             )],
             "somme"
         )
+        print(expression.ecrire())
         expressions.append(expression)
 
         #etape 2: on developpe
@@ -199,23 +201,53 @@ def algorithme_etendu(algorithme_euclide):
 
         expression.termes.pop(1)
         for sous_expression in developpement.termes:
-            expression.termes.append(sous_expression) 
+            expression.termes.append(sous_expression)
+        print(expression.ecrire())
         expressions.append(expression)
 
         #etape 3: on rassemble/simplifie
-        for i in range (len(developpement.termes)):
+        for i in range (len(developpement.termes)-1):
             if (type(expression.termes[0]) != int):
                 if (expression.termes[0].termes[0] == expression.termes[i].termes[0]):
                     expression.termes[0].termes[1] += expression.termes[i].termes[1]
                     expression.pop(i)   # on remet l'expression en etat pour que 
                                         # le prochain changé soit en deuxieme rang
+            if (type(expression.termes[0]) == int):
+                if (expression.termes[0] == expression.termes[i+1].termes[0]):
+                    expression.termes[0] = Brique([
+                        expression.termes[0],
+                        1 + expression.termes[i][1]
+                        ],
+                        "produit"
+                    )
+                    expression.pop(i)
 
+            print(expression.ecrire())
             expressions.append(expression)
 
         i -= 1
     return expressions
 
-print(algorithme_euclide(1234, 57))
-print(algorithme_etendu(algorithme_euclide(1234, 57)))
 
+
+
+def ecrire_algorithme_euclide_etendu(algo_etendu):
+    texte = ""
+    for i in range (len(algo_etendu)):
+        texte += f"1 = {algo_etendu[i].ecrire()}\n"
+    return texte
+
+print(
+    ecrire_algorithme_euclide(
+        algorithme_euclide(124, 57)
+    )
+)
+ecrire_algorithme_euclide_etendu(
+    algorithme_etendu(
+        algorithme_euclide(
+            124,
+            57
+        )
+    )
+)
 
