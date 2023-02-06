@@ -1,3 +1,8 @@
+import copy
+
+
+
+
 def calculer_division_euclidienne(x, y):
     quotient = int(x/y)
     reste = x%y
@@ -139,7 +144,6 @@ def pgcd(a, b):
 
 
 
-
 # directive: bien penser à mettre d'abord le diviseur, puis le quotient
 # (dans toute structure possible)
 # bien utilise des nombres premiers entre eux !!!
@@ -166,11 +170,11 @@ def algorithme_etendu(algorithme_euclide):
         )],
         "somme"
     )
-    print(expression.ecrire())
-    expressions.append(expression)
+    
+    expressions.append(copy.deepcopy(expression))
+    
 
-
-    while i >= 0:
+    while i > 0:
         #etape 1: on remplace par dividende - diviseur x quotient a i-1
         expression.termes[1].termes[0] = Brique([
             algorithme_euclide[i-1][0],
@@ -182,8 +186,8 @@ def algorithme_etendu(algorithme_euclide):
             )],
             "somme"
         )
-        print(expression.ecrire())
-        expressions.append(expression)
+        expressions.append(copy.deepcopy(expression))
+        
 
         #etape 2: on developpe
         developpement = expression.termes[1].developpe()
@@ -202,17 +206,24 @@ def algorithme_etendu(algorithme_euclide):
         expression.termes.pop(1)
         for sous_expression in developpement.termes:
             expression.termes.append(sous_expression)
-        print(expression.ecrire())
-        expressions.append(expression)
+        
+        expressions.append(copy.deepcopy(expression))
+        
 
         #etape 3: on rassemble/simplifie
         for j in range (len(developpement.termes)):
             if (type(expression.termes[0]) != int):
-                if (expression.termes[0].termes[0] == expression.termes[j].termes[0]):
-                    expression.termes[0].termes[1] += expression.termes[j].termes[1]
-                    expression.termes.pop(j)   # on remet l'expression en etat pour que 
-                                        # le prochain changé soit en deuxieme rang
-            if (type(expression.termes[0]) == int):
+                if (expression.termes[0].termes[0] == expression.termes[j+1].termes[0]):
+
+                    expression.termes[j+1] = Brique ([
+                        expression.termes[0].termes[0],
+                        expression.termes[j+1].termes[1] + expression.termes[0].termes[1]
+                    ],
+                    "produit"
+                    )
+                    expression.termes.pop(0)   # on remet l'expression en etat pour que 
+                                               # le prochain changé soit en deuxieme rang
+            elif (type(expression.termes[0]) == int):
                 if (expression.termes[0] == expression.termes[j+1].termes[0]):
                     
                     expression.termes[j+1] = Brique([
@@ -223,8 +234,8 @@ def algorithme_etendu(algorithme_euclide):
                     )
                     expression.termes.pop(0)
 
-                    print(expression.ecrire())
-                    expressions.append(expression)
+        expressions.append(copy.deepcopy(expression))
+             
         i = i-1
     return expressions
 
@@ -233,24 +244,8 @@ def algorithme_etendu(algorithme_euclide):
 
 def ecrire_algorithme_euclide_etendu(algo_etendu):
     texte = ""
-    for i in range (len(algo_etendu)):
+    for ligne in algo_etendu:
         texte += "1 = "
-        texte += algo_etendu[i].ecrire()
+        texte += ligne.ecrire()
         texte += "\n"
-        return texte
-
-print(
-    ecrire_algorithme_euclide(
-        algorithme_euclide(124, 57)
-    )
-)
-print(
-ecrire_algorithme_euclide_etendu(
-    algorithme_etendu(
-        algorithme_euclide(
-            124,
-            57
-        )
-    )
-)
-)
+    return texte
