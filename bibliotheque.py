@@ -246,8 +246,13 @@ def ecrire_algorithme_euclide_etendu(algo_etendu):
     texte = ""
     if (type(algo_etendu) == str):
         return "Algorithme de nombres non premiers entre-eux"
+    i = 1
     for ligne in algo_etendu:
         texte += "1 = "
         texte += ligne.ecrire()
         texte += "\n"
+        if (i>2):
+            i = 0
+            texte += "\n"
+        i += 1
     return texte
