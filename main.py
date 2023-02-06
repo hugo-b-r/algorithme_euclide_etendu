@@ -144,9 +144,9 @@ def algorithme_etendu(algorithme_euclide):
     #on met la premiere expression dans la boite
     expression = Brique ([
         algorithme_euclide[i][0],
-        -Brique ([
+        Brique ([
             algorithme_euclide[i][1],
-            algorithme_euclide[i][2]
+            -algorithme_euclide[i][2]
             ],
             "produit"
         )],
@@ -159,9 +159,9 @@ def algorithme_etendu(algorithme_euclide):
         #etape 1: on remplace par dividende - diviseur x quotient a i-1
         expression.termes[1].termes[0] = Brique ([
             algorithme_euclide[i-1][0],
-            -Brique ([
+            Brique ([
                 algorithme_euclide[i-1][1],
-                algorithme_euclide[i-1][2]
+                -algorithme_euclide[i-1][2]
                 ],
                 "produit"
             )],
