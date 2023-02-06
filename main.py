@@ -171,7 +171,7 @@ def algorithme_etendu(algorithme_euclide):
 
     while i > 0:
         #etape 1: on remplace par dividende - diviseur x quotient a i-1
-        expression.termes[1].termes[0] = Brique ([
+        expression.termes[1].termes[0] = Brique([
             algorithme_euclide[i-1][0],
             Brique ([
                 algorithme_euclide[i-1][1],
@@ -186,23 +186,27 @@ def algorithme_etendu(algorithme_euclide):
         #etape 2: on developpe
         developpement = expression.termes[1].developpe()
         #on transforme le deuxieme produit du develppement en un simple
-        developpement[1] = Brique ([
-            developpement[1].termes[0].termes[0],
-            developpement[1].termes[0].termes[1] * developpement[1].termes[1].termes[0]
+        terme1 = developpement.termes[1].termes[0].termes[0]
+        terme2 = developpement.termes[1].termes[0].termes[1]
+        terme3 = developpement.termes[1].termes[1]
+        term_prod = terme2 * terme3
+        developpement.termes[1] = Brique([
+            terme1,
+            terme2 * terme3
             ],
             "produit"
         )
 
-        expression.pop(1)
-        for sous_expression in developpement:
-            expression.append(sous_expression) 
+        expression.termes.pop(1)
+        for sous_expression in developpement.termes:
+            expression.termes.append(sous_expression) 
         expressions.append(expression)
 
         #etape 3: on rassemble/simplifie
-        for i in range (len(developpement)):
+        for i in range (len(developpement.termes)):
             try:
-                if (expression[0].termes[0] == expression[i].termes[0]):
-                    expression[0].termes[1] += expression[i].termes[1]
+                if (expression.termes[0].termes[0] == expression.termes[i].termes[0]):
+                    expression.termes[0].termes[1] += expression.termes[i].termes[1]
                     expression.pop(i)   # on remet l'expression en etat pour que 
                                         # le prochain changé soit en deuxieme rang
             finally:
