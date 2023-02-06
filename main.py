@@ -1,3 +1,8 @@
+import math
+
+
+
+
 def calculer_division_euclidienne(x, y):
     quotient = int(x/y)
     reste = x%y
@@ -111,6 +116,16 @@ def ecrire_algorithme_euclide(algorithme_euclide):
         texte += str(ligne[3])
         texte += "\n"
     return texte
+
+
+
+
+def pgcd(a, b):
+    while a != b:
+        d = math.abs(b-a)
+        b = a
+        a = d
+    return d
 
 
 
