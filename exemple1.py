@@ -2,7 +2,7 @@ from bibliotheque import *
 
 a = 54
 b = 7
-division_euclidienne = calculer_division_euclidienne(a, b)
+division_euclidienne = calculer_division_euclidienne(a, b) # retourne un tuple
 
 print(
     ecrire_division_euclidienne

@@ -1,7 +1,7 @@
 from bibliotheque import *
 
-a = int(10110)
-b = int(234593)
+a = 10110
+b = 234593
 
 
 print(
