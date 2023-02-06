@@ -31,12 +31,26 @@ class Brique:
         if (self.type == "produit"):
             #ATTENTION, NE DEVELEOPPE QUE LES DEUX PREMIERS TERMES
             resultat = Brique([], "somme")
-            
-            #on developpe le produit actif
-            for i in self.termes[0].termes:
-                for j in self.termes[1].termes:
-                    produit_intermediaire = Brique([j, i], "produit")
+            if ((type(self.termes[0]) == int) and (type(self.termes[1]) != int)):
+                for i in self.termes[1].termes:
+                    produit_intermediaire = Brique([self.termes[0], i], "produit")
                     resultat.termes.append(produit_intermediaire)
+
+            elif ((type(self.termes[0]) != int) and (type(self.termes[1]) == int)):
+                for i in self.termes[0].termes:
+                    produit_intermediaire = Brique([i, self.termes[1]], "produit")
+                    resultat.termes.append(produit_intermediaire)
+
+            if ((type(self.termes[0]) != int) and (type(self.termes[1]) != int)):
+                #on developpe le produit actif
+                for i in self.termes[0].termes:
+                    for j in self.termes[1].termes:
+                        produit_intermediaire = Brique([j, i], "produit")
+                        resultat.termes.append(produit_intermediaire)
+
+            if ((type(self.termes[0]) != int) and (type(self.termes[1]) != int)):
+                resultat.append(Brique([self.termes[0], self.termes[1]], "produit"))
+            
             return resultat
 
         else:
