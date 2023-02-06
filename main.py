@@ -139,7 +139,7 @@ def algorithme_etendu(algorithme_euclide):
     expressions.append(expression)
 
 
-    while i >= 0:
+    while i > 0:
         #etape 1: on remplace par dividende - diviseur x quotient a i-1
         expression.termes[1].termes[0] = Brique ([
             algorithme_euclide[i-1][0],
