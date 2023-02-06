@@ -133,7 +133,13 @@ def pgcd(a, b):
 
 # directive: bien penser à mettre d'abord le diviseur, puis le quotient
 # (dans toute structure possible)
+# bien utilise des nombres premiers entre eux !!!
 def algorithme_etendu(algorithme_euclide):
+    
+    if (pgcd(algorithme_euclide[0][0], algorithme_euclide[0][1]) != 1):
+        return "non premiers entre eux"
+
+
     texte = ""
     i = 0
     # on "positionne" i à l'étape où il y a 1 comme reste
