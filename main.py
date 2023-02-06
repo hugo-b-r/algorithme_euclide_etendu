@@ -206,7 +206,7 @@ def algorithme_etendu(algorithme_euclide):
         expressions.append(expression)
 
         #etape 3: on rassemble/simplifie
-        for i in range (len(developpement.termes)-1):
+        for i in range (len(developpement.termes)):
             if (type(expression.termes[0]) != int):
                 if (expression.termes[0].termes[0] == expression.termes[i].termes[0]):
                     expression.termes[0].termes[1] += expression.termes[i].termes[1]
@@ -214,16 +214,17 @@ def algorithme_etendu(algorithme_euclide):
                                         # le prochain changé soit en deuxieme rang
             if (type(expression.termes[0]) == int):
                 if (expression.termes[0] == expression.termes[i+1].termes[0]):
+                    
                     expression.termes[0] = Brique([
                         expression.termes[0],
-                        1 + expression.termes[i][1]
+                        1 + expression.termes[i+1].termes[1]
                         ],
                         "produit"
                     )
-                    expression.pop(i)
+                    expression.termes.pop(i+1)
 
-            print(expression.ecrire())
-            expressions.append(expression)
+                    print(expression.ecrire())
+                    expressions.append(expression)
 
         i -= 1
     return expressions
