@@ -170,7 +170,7 @@ def algorithme_etendu(algorithme_euclide):
     expressions.append(expression)
 
 
-    while i > 0:
+    while i >= 0:
         #etape 1: on remplace par dividende - diviseur x quotient a i-1
         expression.termes[1].termes[0] = Brique([
             algorithme_euclide[i-1][0],
@@ -206,18 +206,18 @@ def algorithme_etendu(algorithme_euclide):
         expressions.append(expression)
 
         #etape 3: on rassemble/simplifie
-        for i in range (len(developpement.termes)):
+        for j in range (len(developpement.termes)):
             if (type(expression.termes[0]) != int):
-                if (expression.termes[0].termes[0] == expression.termes[i].termes[0]):
-                    expression.termes[0].termes[1] += expression.termes[i].termes[1]
-                    expression.pop(i)   # on remet l'expression en etat pour que 
+                if (expression.termes[0].termes[0] == expression.termes[j].termes[0]):
+                    expression.termes[0].termes[1] += expression.termes[j].termes[1]
+                    expression.termes.pop(j)   # on remet l'expression en etat pour que 
                                         # le prochain changé soit en deuxieme rang
             if (type(expression.termes[0]) == int):
-                if (expression.termes[0] == expression.termes[i+1].termes[0]):
+                if (expression.termes[0] == expression.termes[j+1].termes[0]):
                     
-                    expression.termes[i+1] = Brique([
+                    expression.termes[j+1] = Brique([
                         expression.termes[0],
-                        1 + expression.termes[i+1].termes[1]
+                        1 + expression.termes[j+1].termes[1]
                         ],
                         "produit"
                     )
@@ -225,8 +225,7 @@ def algorithme_etendu(algorithme_euclide):
 
                     print(expression.ecrire())
                     expressions.append(expression)
-
-        i -= 1
+        i = i-1
     return expressions
 
 
@@ -235,14 +234,17 @@ def algorithme_etendu(algorithme_euclide):
 def ecrire_algorithme_euclide_etendu(algo_etendu):
     texte = ""
     for i in range (len(algo_etendu)):
-        texte += f"1 = {algo_etendu[i].ecrire()}\n"
-    return texte
+        texte += "1 = "
+        texte += algo_etendu[i].ecrire()
+        texte += "\n"
+        return texte
 
 print(
     ecrire_algorithme_euclide(
         algorithme_euclide(124, 57)
     )
 )
+print(
 ecrire_algorithme_euclide_etendu(
     algorithme_etendu(
         algorithme_euclide(
@@ -251,4 +253,4 @@ ecrire_algorithme_euclide_etendu(
         )
     )
 )
-
+)
