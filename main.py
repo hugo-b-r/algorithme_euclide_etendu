@@ -154,12 +154,21 @@ def algorithme_etendu(algorithme_euclide):
         expressions.append(expression)
 
         #etape 2: on developpe
-        developpement_intermediaire = expression.termes[1].developpe()
+        developpement = expression.termes[1].developpe()
         expression.pop(1)
-        for sous_expression in developpement_intermediaire:
+        for sous_expression in developpement:
             expression.append(sous_expression)
+        expressions.append(expression)
 
         #etape 3: on rassemble/simplifie
+        for i in range (len(developpement))
+        try:
+            if (expression[0].termes[0] == expression[i].termes[0]):
+                expression[i].termes[1] += expression[0].termes[1]
+                expression.pop(0)
+        finally:
+            expressions.append(expression)
+
         i -= 1
     return expressions
 
