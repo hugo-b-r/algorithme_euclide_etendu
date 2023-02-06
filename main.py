@@ -215,13 +215,13 @@ def algorithme_etendu(algorithme_euclide):
             if (type(expression.termes[0]) == int):
                 if (expression.termes[0] == expression.termes[i+1].termes[0]):
                     
-                    expression.termes[0] = Brique([
+                    expression.termes[i+1] = Brique([
                         expression.termes[0],
                         1 + expression.termes[i+1].termes[1]
                         ],
                         "produit"
                     )
-                    expression.termes.pop(i+1)
+                    expression.termes.pop(0)
 
                     print(expression.ecrire())
                     expressions.append(expression)
